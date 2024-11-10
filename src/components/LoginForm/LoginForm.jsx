@@ -39,7 +39,7 @@ const LoginForm = () => {
         />
 
         <button className={css.button} type="submit">
-          Add contact
+          Sign In
         </button>
       </Form>
     </Formik>

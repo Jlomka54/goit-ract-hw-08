@@ -17,7 +17,7 @@ import { filterReducer } from "./filter/slice";
 import { authReducer } from "./auth/slice";
 
 const authConfig = {
-  key: "auth",
+  key: "authToken",
   storage,
   whitelist: ["token"], // blacklist: ["showProfilesList"]
 };
