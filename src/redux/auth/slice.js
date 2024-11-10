@@ -30,11 +30,11 @@ export const authSlice = createSlice({
         state.user.name = action.payload.user.name;
         state.user.email = action.payload.user.email;
       })
-      .addCase(apiLoginUser.rejected, (state, action) => {
+      .addCase(apiRegisterUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
       })
-      .addCase(apiRegisterUser.pending, (state) => {
+      .addCase(apiLoginUser.pending, (state) => {
         state.isLoading = true;
         state.isError = null;
       })
