@@ -42,3 +42,23 @@ export const apiLoginUser = createAsyncThunk(
     }
   }
 );
+
+export const apiGetCurrentUser = createAsyncThunk(
+  "auth/loginUser",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const token = state.auth.token;
+
+    if (!token) {
+      return thunkAPI.rejectWithValue("No valid token to  refresh user data");
+    }
+    try {
+      setToken(token);
+      const { data } = await authInstance.get("/users/current");
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
