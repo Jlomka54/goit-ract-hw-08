@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 
 import css from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contacts/operations";
+import { apiAddContact } from "../../redux/contacts/operations";
 import { addProfileSchema } from "../../utilits/formSchema";
 
 const ContactForm = () => {
@@ -11,15 +11,10 @@ const ContactForm = () => {
     name: "",
     number: "",
   };
-  const handleSubmit = (value, action) => {
-    dispatch(
-      addContact({
-        name: value.name,
-        number: value.number,
-      })
-    );
+  const handleSubmit = (values, actions) => {
+    dispatch(apiAddContact(values));
 
-    action.resetForm();
+    actions.resetForm();
   };
 
   return (

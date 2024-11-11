@@ -1,14 +1,21 @@
 import css from "./Header.module.css";
 import clsx from "clsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { NavLink } from "react-router-dom";
 import {
   selectUserData,
   selectUserDataIsLoggedIn,
 } from "../../redux/auth/selectors";
+import { logout } from "../../redux/auth/operations";
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(logout());
+  };
+
   const isLoggedIn = useSelector(selectUserDataIsLoggedIn);
   const userData = useSelector(selectUserData);
   const linkStyle = ({ isActive }) =>
@@ -22,24 +29,28 @@ const Header = () => {
       <NavLink className={linkStyle} to="/">
         Home page
       </NavLink>
-      <NavLink className={linkStyle} to="/contacts">
-        Phonebook
-      </NavLink>
+      {isLoggedIn && (
+        <NavLink className={linkStyle} to="/contacts">
+          Phonebook
+        </NavLink>
+      )}
+
       {isLoggedIn ? (
-        <div>
-          <span>Hello, {userData.name}</span>
-          <button>Logout</button>
+        <div className={css.userMenu}>
+          <span className={css.span}>Hello, {userData.name}</span>
+          <button type="button" onClick={onLogout} className={css.button}>
+            Logout
+          </button>
         </div>
       ) : (
-        <>
-          {" "}
+        <div className={css.userMenu}>
           <NavLink className={linkStyle} to="/login">
             Login
           </NavLink>
           <NavLink className={linkStyle} to="/register">
             Register
           </NavLink>
-        </>
+        </div>
       )}
     </header>
   );

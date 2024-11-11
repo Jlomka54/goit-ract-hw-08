@@ -3,7 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "./LoginForm.module.css";
 import { LoginUserSchema } from "../../utilits/formSchema";
 import { useDispatch } from "react-redux";
-import { apiLoginUser } from "../../redux/auth/operations";
+import { login } from "../../redux/auth/operations";
 
 const LoginForm = () => {
   const INITAL_VALUE = {
@@ -15,7 +15,7 @@ const LoginForm = () => {
 
   const handleSubmit = (values, actions) => {
     console.log("🚀 ~ handleSubmit ~ values:", values);
-    dispatch(apiLoginUser(values));
+    dispatch(login(values));
 
     actions.resetForm();
   };

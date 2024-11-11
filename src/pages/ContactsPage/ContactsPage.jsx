@@ -1,31 +1,32 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectError, selectLoading } from "../../redux/contacts/selectors";
-import ContactForm from "../../components/ContactForm/ContactForm";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import ContactList from "../../components/ContactList/ContactList";
-import { fetchContacts } from "../../redux/contacts/operations";
+import { apiGetContacts } from "../../redux/contacts/operations";
+import { Spinner } from "react-bootstrap";
+import ContactForm from "../../components/ContactForm/ContactForm";
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(apiGetContacts());
   }, [dispatch]);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
   return (
     <div>
-      {" "}
-      <ContactForm />
-      <SearchBox />
-      {loading && <p>Loading.....</p>}
+      {loading && <Spinner animation="border" variant="info" />}
       {error && (
         <p>
           Oops, some error occured &quot;{error}&quot;. Please, try again later
           🤷‍♂️.
         </p>
       )}
+      <ContactForm />
+      <SearchBox />
+
       {!loading && !error && <ContactList />}
     </div>
   );

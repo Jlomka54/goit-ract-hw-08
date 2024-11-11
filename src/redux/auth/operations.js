@@ -13,8 +13,8 @@ export const clearToken = () => {
   authInstance.defaults.headers.common.Authorization = "";
 };
 
-export const apiRegisterUser = createAsyncThunk(
-  "auth/registerUser",
+export const register = createAsyncThunk(
+  "auth/register",
   async (formData, thunkAPI) => {
     try {
       const { data } = await authInstance.post("/users/signup", formData);
@@ -28,8 +28,8 @@ export const apiRegisterUser = createAsyncThunk(
   }
 );
 
-export const apiLoginUser = createAsyncThunk(
-  "auth/loginUser",
+export const login = createAsyncThunk(
+  "auth/login",
   async (formData, thunkAPI) => {
     try {
       const { data } = await authInstance.post("/users/login", formData);
@@ -43,8 +43,8 @@ export const apiLoginUser = createAsyncThunk(
   }
 );
 
-export const apiGetCurrentUser = createAsyncThunk(
-  "auth/loginUser",
+export const refreshUser = createAsyncThunk(
+  "auth/refresh",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const token = state.auth.token;
@@ -62,3 +62,14 @@ export const apiGetCurrentUser = createAsyncThunk(
     }
   }
 );
+
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  try {
+    const { data } = await authInstance.post("/users/logout");
+    clearToken();
+
+    return data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});

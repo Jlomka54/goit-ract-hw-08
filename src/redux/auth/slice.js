@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { apiGetCurrentUser, apiLoginUser, apiRegisterUser } from "./operations";
+import { login, logout, refreshUser, register } from "./operations";
 
 const INITIAL_STATE = {
   user: {
@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 
   token: null,
   isLoggedIn: false,
-  isRefreshing: true,
+  isRefreshing: false,
 };
 
 export const authSlice = createSlice({
@@ -19,46 +19,58 @@ export const authSlice = createSlice({
   initialState: INITIAL_STATE,
   extraReducers: (builder) =>
     builder
-      .addCase(apiRegisterUser.pending, (state) => {
+      .addCase(register.pending, (state) => {
         state.isLoading = true;
         state.isError = null;
       })
-      .addCase(apiRegisterUser.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.token = action.payload.token;
         state.user.name = action.payload.user.name;
         state.user.email = action.payload.user.email;
       })
-      .addCase(apiRegisterUser.rejected, (state, action) => {
+      .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
       })
-      .addCase(apiLoginUser.pending, (state) => {
+      .addCase(login.pending, (state) => {
         state.isLoading = true;
         state.isError = null;
       })
-      .addCase(apiLoginUser.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.token = action.payload.token;
-        state.user.name = action.payload.name;
-        state.user.email = action.payload.email;
+        state.user.name = action.payload.user.name;
+        state.user.email = action.payload.user.email;
       })
-      .addCase(apiLoginUser.rejected, (state, action) => {
+      .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = action.payload;
       })
-      .addCase(apiGetCurrentUser.pending, (state) => {
+      .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
         state.isError = null;
       })
-      .addCase(apiGetCurrentUser.fulfilled, (state, action) => {
+      .addCase(refreshUser.fulfilled, (state, action) => {
         state.isRefreshing = false;
         state.isLoggedIn = true;
         state.user.name = action.payload.name;
         state.user.email = action.payload.email;
       })
-      .addCase(apiGetCurrentUser.rejected, (state, action) => {
+      .addCase(refreshUser.rejected, (state, action) => {
         state.isRefreshing = false;
+        state.isError = action.payload;
+      })
+      .addCase(logout.pending, (state) => {
+        state.isLoading = true;
+        state.isError = null;
+      })
+      .addCase(logout.fulfilled, () => {
+        return INITIAL_STATE;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.isRefreshing = false;
+
         state.isError = action.payload;
       }),
 });

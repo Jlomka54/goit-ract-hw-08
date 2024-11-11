@@ -3,7 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "./RegistrationForm.module.css";
 import { RegisterUserSchema } from "../../utilits/formSchema";
 import { useDispatch } from "react-redux";
-import { apiRegisterUser } from "../../redux/auth/operations";
+import { register } from "../../redux/auth/operations";
 
 const RegistrationForm = () => {
   const INITAL_VALUE = {
@@ -17,7 +17,7 @@ const RegistrationForm = () => {
   const handleSubmit = (values, actions) => {
     console.log("🚀 ~ handleSubmit ~ values:", values);
 
-    dispatch(apiRegisterUser(values));
+    dispatch(register(values));
 
     actions.resetForm();
   };

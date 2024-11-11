@@ -24,3 +24,17 @@
   background-color: #e0e0e0;
   color: #0056b3;
 }
+
+.button {
+  padding: 10px;
+  width: 100px;
+}
+.userMenu {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-left: auto;
+}
+.span {
+  margin-right: 20px;
+}

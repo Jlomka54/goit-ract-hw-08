@@ -1,30 +1,53 @@
-import Header from "./components/Header/Header";
+import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router";
-import ContactsPage from "./pages/ContactsPage/ContactsPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
-import HomePage from "./pages/HomePage/HomePage";
-import ErrorPage from "./pages/ErrorPage/ErrorPage";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { apiGetCurrentUser } from "./redux/auth/operations";
+import { useDispatch, useSelector } from "react-redux";
+
+import { refreshUser } from "./redux/auth/operations";
+import { selectUserDataIsRefresh } from "./redux/auth/selectors";
+
+const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
+const RegistrationPage = lazy(() =>
+  import("./pages/RegistrationPage/RegistrationPage")
+);
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage/ErrorPage"));
+
+import Header from "./components/Header/Header";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
+import { Spinner } from "react-bootstrap";
 
 const App = () => {
   const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectUserDataIsRefresh);
   useEffect(() => {
-    dispatch(apiGetCurrentUser());
+    dispatch(refreshUser());
   }, [dispatch]);
-
+  if (isRefreshing) {
+    return <div>Refreshing ...</div>;
+  }
   return (
     <div>
       <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/register" element={<RegistrationPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/contacts" element={<ContactsPage />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+      <Suspense fallback={<Spinner animation="border" variant="info" />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/register"
+            element={<RestrictedRoute component={<RegistrationPage />} />}
+          />
+          <Route
+            path="/login"
+            element={<RestrictedRoute component={<LoginPage />} />}
+          />
+          <Route
+            path="/contacts"
+            element={<PrivateRoute component={<ContactsPage />} />}
+          />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 };
