@@ -13,10 +13,10 @@ const RegistrationPage = lazy(() =>
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage/ErrorPage"));
 
-import Header from "./components/Header/Header";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import { Spinner } from "react-bootstrap";
+import Layout from "./components/Layout/Layout";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const App = () => {
   }
   return (
     <div>
-      <Header />
+      <Layout />
       <Suspense fallback={<Spinner animation="border" variant="info" />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
