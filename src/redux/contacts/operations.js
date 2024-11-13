@@ -6,7 +6,6 @@ export const apiGetContacts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await authInstance.get("/contacts");
-      console.log("🚀 ~ data:", data);
 
       return data;
     } catch (error) {
@@ -20,7 +19,6 @@ export const apiAddContact = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const { data } = await authInstance.post("/contacts", formData);
-      console.log("🚀 ~ data:", data);
 
       return data;
     } catch (error) {
@@ -33,7 +31,6 @@ export const apiDeleteContact = createAsyncThunk(
   async (contactId, thunkAPI) => {
     try {
       const { data } = await authInstance.delete(`/contacts/${contactId}`);
-      console.log("🚀 ~ data:", data);
 
       return data;
     } catch (error) {

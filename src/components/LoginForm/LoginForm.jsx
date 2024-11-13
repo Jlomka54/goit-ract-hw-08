@@ -14,7 +14,6 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    console.log("🚀 ~ handleSubmit ~ values:", values);
     dispatch(login(values));
 
     actions.resetForm();
