@@ -18,6 +18,7 @@ export const register = createAsyncThunk(
   async (formData, thunkAPI) => {
     try {
       const { data } = await authInstance.post("/users/signup", formData);
+       
       // data -> email: "1111@gmai.com";name: "asdasdasd"   password: "222222222";
       setToken(data.token);
 

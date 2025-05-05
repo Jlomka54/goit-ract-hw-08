@@ -5,19 +5,19 @@ import { RegisterUserSchema } from "../../utilits/formSchema";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 
+const INITAL_VALUE = {
+  name: "",
+  email: "",
+  password: "",
+};
 const RegistrationForm = () => {
-  const INITAL_VALUE = {
-    name: "",
-    email: "",
-    password: "",
-  };
 
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
     dispatch(register(values));
 
-    actions.resetForm();
+    // actions.resetForm();
   };
 
   return (
