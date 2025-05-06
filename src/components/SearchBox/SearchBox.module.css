@@ -1,4 +1,30 @@
 .container {
-  margin: 20px 0;
-  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.container p {
+  color: #F9FAFB;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.container input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #2563EB; /* blue-600 */
+  background-color: #1E293B; /* dark input */
+  color: #F9FAFB;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.container input:focus {
+  border-color: #3B82F6; /* blue-500 */
 }

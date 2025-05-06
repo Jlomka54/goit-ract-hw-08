@@ -12,10 +12,10 @@ const Contact = (props) => {
   return (
     <li className={css.contactItem} key={id}>
       <div className={css.box}>
-        <p>{name}</p>
-        <p>{number}</p>
+        <p>Name: {name}</p>
+        <p>Phone: {number}</p>
       </div>
-      <button type="button" onClick={() => handleDelete(id)}>
+      <button className={css.button} type="button" onClick={() => handleDelete(id)}>
         Delete
       </button>
     </li>

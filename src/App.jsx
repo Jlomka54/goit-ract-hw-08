@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { refreshUser } from "./redux/auth/operations";
 import { selectUserDataIsRefresh } from "./redux/auth/selectors";
 
+
 const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 const RegistrationPage = lazy(() =>
@@ -17,6 +18,9 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import { Spinner } from "react-bootstrap";
 import Layout from "./components/Layout/Layout";
+import './App.css'
+import Loader from "./components/Loader";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,10 +29,10 @@ const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
   if (isRefreshing) {
-    return <div>Refreshing ...</div>;
+    return <Loader/>;
   }
   return (
-    <div>
+    <div className="container">
       <Layout />
       <Suspense fallback={<Spinner animation="border" variant="info" />}>
         <Routes>

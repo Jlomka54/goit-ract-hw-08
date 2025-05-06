@@ -14,7 +14,7 @@ const Navigation = () => {
     });
 
   return (
-    <nav>
+    <nav className={css.userMenu}>
       <NavLink className={linkStyle} to="/">
         Home page
       </NavLink>

@@ -7,8 +7,10 @@
 html,
 body {
   height: 100%;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   line-height: 1.5;
+  background-color: #111827;
+  color: #F9FAFB;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
