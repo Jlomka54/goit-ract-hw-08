@@ -15,7 +15,7 @@ const UserMenu = () => {
   return (
     <div>
      <div className={css.greeting}>
-  <span>Hello,</span>
+  <span>Hello</span>
   <span>{userData.name}</span>
 </div>
 

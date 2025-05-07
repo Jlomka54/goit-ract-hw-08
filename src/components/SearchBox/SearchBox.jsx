@@ -6,7 +6,7 @@ const SearchBox = () => {
   const filter = useSelector((state) => state.filter.filter);
   const dispatch = useDispatch();
   return (
-    <div className={css.container}>
+    <div className={css.searchBox}>
       <p>Find contact by name</p>
       <input
         type="text"

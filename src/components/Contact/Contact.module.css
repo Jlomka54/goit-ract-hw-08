@@ -3,13 +3,13 @@
   border: 1px solid #4B5563; 
   border-radius: 8px;
   display: flex;
+align-items: center;
   flex-direction: row;
   width: 100%;
   max-width: 360px;
   background-color: #1F2937; 
-  color: #F9FAFB; 
+  color:var(--color-text);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  margin-bottom: 16px;
 }
 
 .box {
@@ -18,13 +18,12 @@
   word-break: break-word;
 }
 .button {
-  padding: 12px;
-  background-color: #2563EB; 
-  color: #F9FAFB;
+  padding: 0 12px;
+  background-color: var(--color-accent); 
+  color:var(--color-text);
   border: none;
   border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
   font-weight: 500;
+  height: 40px;
   text-align: center;
 }

@@ -1,27 +1,20 @@
 
 .link {
-  font-size: 18px;
   text-decoration: none;
-  color: #E5E7EB;
+  color: var(--color-text);
   padding: 5px 10px;
   border-radius: 5px;
   transition: color 0.3s, background-color 0.3s;
 }
 .linkActive {
-  color: #3B82F6;
+  color:var(--color-accent);
   background-color: #e0e0e0;
 
 }
-
-
 
 
 .userMenu {
   display: flex;
   justify-content: start;
   align-items: center;
-  margin-left: auto;
-}
-.span {
-  margin-right: 20px;
 }

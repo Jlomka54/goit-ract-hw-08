@@ -1,3 +1,10 @@
+:root {
+  --font-primary: 'Roboto', sans-serif;
+  --color-bg: #1e293b;
+  --color-text: #f9fafb;
+  --color-accent: #2563eb;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,12 +14,23 @@
 html,
 body {
   height: 100%;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-primary);
+  font-size: 14px;
   line-height: 1.5;
-  background-color: #111827;
-  color: #F9FAFB;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+@media  (min-width: 768px){
+  body{
+    font-size: 16px;
+  }
+}
+@media  (min-width: 1024px){
+  body{
+    font-size: 18px;
+  }
 }
 
 h2,
@@ -37,6 +55,7 @@ a {
 
 button {
   cursor: pointer;
+  color: var(--color-text);
 }
 
 ul,

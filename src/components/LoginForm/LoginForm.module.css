@@ -7,9 +7,9 @@
   background-color: #374151; 
   justify-content: center;
   flex-direction: column;
-  margin-top: 20px;
+margin: 20px auto;
   padding: 20px;
-  margin-bottom: 20px;
+
 }
 
 .input {
